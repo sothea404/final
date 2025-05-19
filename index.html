@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Shop - Your Online Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="./">T-Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <form class="d-flex me-2">
+                        <div class="input-group">
+                            <input class="form-control" type="search" id="searchInput" placeholder="Search products" aria-label="Search">
+                            <button class="btn btn-outline-light" type="button" id="searchBtn"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
+                    <div class="position-relative ms-2">
+                        <button class="btn btn-outline-light" id="cartBtn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cartBadge">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="display-4 fw-bold">Welcome to T-Shop</h1>
+                <p class="lead mb-4">Discover amazing products with premium quality at unbeatable prices. Shop the latest trends in electronics, fashion, and home essentials.</p>
+                <button class="btn hero-btn btn-lg">Shop Now <i class="fas fa-arrow-right ms-2"></i></button>
+            </div>
+            <div class="hero-image">
+                <img src="images/slider-img.png" alt="Shopping collection" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filter and Sort Options -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-secondary" data-filter="all">All Products</button>
+                    <button type="button" class="btn btn-outline-secondary" data-filter="electronics">Electronics</button>
+                    <button type="button" class="btn btn-outline-secondary" data-filter="clothing">Clothing</button>
+                    <button type="button" class="btn btn-outline-secondary" data-filter="home">Home</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select" id="sortSelect">
+                    <option value="default">Default Sorting</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="name">Name: A to Z</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="row" id="productsContainer">
+            <!-- Products will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer">
+        <div class="p-3 bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Your Cart</h5>
+            <button class="btn-close btn-close-white" id="closeCartBtn"></button>
+        </div>
+        <div class="p-3" id="cartItems">
+            <!-- Cart items will be added here -->
+        </div>
+        <div class="p-3 border-top">
+            <div class="d-flex justify-content-between mb-3">
+                <h5>Total:</h5>
+                <h5 id="cartTotal">$0.00</h5>
+            </div>
+            <button class="btn btn-primary w-100 mb-2">Checkout</button>
+            <button class="btn btn-outline-secondary w-100" id="clearCartBtn">Clear Cart</button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5>E-Shop</h5>
+                    <p>Your one-stop destination for all your shopping needs.</p>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5>Shop</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Products</a></li>
+                        <li><a href="#" class="text-white">Categories</a></li>
+                        <li><a href="#" class="text-white">Deals</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">FAQ</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                        <li><a href="#" class="text-white">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Stay Connected</h5>
+                    <div class="d-flex">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2025 E-Shop. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3">Privacy Policy</a>
+                    <a href="#" class="text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
