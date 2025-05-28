@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Shop - Your Online Store</title>
+    <title>T-Shop - Your Online Store</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
      <link rel="stylesheet" href="style.css">
@@ -66,6 +66,31 @@
         </div>
     </section>
 
+    <div class="container">
+        <h2 class="section-title text-start ps-5">Hot Shops</h2>
+        
+        <!-- Scrollable Product Carousel -->
+        <div class="carousel-container">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Product cards will be inserted here -->
+                </div>
+            </div>
+            
+            <button class="nav-btn next-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <!-- Navigation Dots -->
+        <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+
+
     <!-- Main Content -->
     <div class="container">
         <!-- Filter and Sort Options -->
@@ -87,6 +112,8 @@
                 </select>
             </div>
         </div>
+
+        
 
         <!-- Products Grid -->
         <div class="row" id="productsContainer">
@@ -119,7 +146,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
-                    <h5>E-Shop</h5>
+                    <h5>T-Shop</h5>
                     <p>Your one-stop destination for all your shopping needs.</p>
                 </div>
                 <div class="col-md-2 mb-4 mb-md-0">
@@ -151,7 +178,7 @@
             <hr class="my-4 bg-light">
             <div class="row">
                 <div class="col-md-6 mb-3 mb-md-0">
-                    <p class="mb-0">&copy; 2025 E-Shop. All Rights Reserved.</p>
+                    <p class="mb-0">&copy; 2025 T-Shop. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
                     <a href="#" class="text-white me-3">Privacy Policy</a>

@@ -503,3 +503,159 @@ window.addEventListener('resize', () => {
         document.body.style.overflow = '';
     }
 });
+
+// Carousel functionality
+        class ProductCarousel {
+            constructor() {
+                this.track = document.getElementById('carouselTrack');
+                this.prevBtn = document.getElementById('prevBtn');
+                this.nextBtn = document.getElementById('nextBtn');
+                this.dotsContainer = document.getElementById('carouselDots');
+                this.currentIndex = 0;
+                this.cardWidth = 280 + 16; // card width + gap
+                this.visibleCards = this.getVisibleCards();
+                this.maxIndex = Math.max(0, products.length - this.visibleCards);
+                
+                this.init();
+            }
+
+            getVisibleCards() {
+                const containerWidth = document.querySelector('.carousel-wrapper').offsetWidth;
+                return Math.floor(containerWidth / this.cardWidth);
+            }
+
+            init() {
+                this.renderProducts();
+                this.createDots();
+                this.updateButtons();
+                this.bindEvents();
+                
+                // Update on resize
+                window.addEventListener('resize', () => {
+                    this.visibleCards = this.getVisibleCards();
+                    this.maxIndex = Math.max(0, products.length - this.visibleCards);
+                    this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
+                    this.updateCarousel();
+                });
+            }
+
+            renderProducts() {
+                const featuredProducts = products.filter(product => product.featured);
+                
+                featuredProducts.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'carousel-card';
+                    card.innerHTML = `
+                        <div class="card-img-container">
+                            <img src="${product.image}" class="card-img" alt="${product.name}" onerror="this.src='https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=400&fit=crop'">
+                            ${product.featured ? '<div class="featured-badge">Featured</div>' : ''}
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-description">${product.description}</p>
+                            <div class="card-price">$${product.price.toFixed(2)}</div>
+                            <button class="btn btn-primary-1" onclick="addToCart(${product.id})">
+                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                            </button>
+                        </div>
+                    `;
+                    this.track.appendChild(card);
+                });
+            }
+
+            createDots() {
+                const dotCount = Math.ceil(products.filter(p => p.featured).length / this.visibleCards);
+                
+                for (let i = 0; i < dotCount; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot';
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.dotsContainer.appendChild(dot);
+                }
+            }
+
+            updateCarousel() {
+                const translateX = -this.currentIndex * this.cardWidth;
+                this.track.style.transform = `translateX(${translateX}px)`;
+                this.updateButtons();
+                this.updateDots();
+            }
+
+            updateButtons() {
+                this.prevBtn.disabled = this.currentIndex === 0;
+                this.nextBtn.disabled = this.currentIndex >= this.maxIndex;
+            }
+
+            updateDots() {
+                const dots = this.dotsContainer.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === Math.floor(this.currentIndex / this.visibleCards));
+                });
+            }
+
+            prev() {
+                if (this.currentIndex > 0) {
+                    this.currentIndex--;
+                    this.updateCarousel();
+                }
+            }
+
+            next() {
+                if (this.currentIndex < this.maxIndex) {
+                    this.currentIndex++;
+                    this.updateCarousel();
+                }
+            }
+
+            goToSlide(slideIndex) {
+                this.currentIndex = slideIndex * this.visibleCards;
+                this.currentIndex = Math.min(this.currentIndex, this.maxIndex);
+                this.updateCarousel();
+            }
+
+            bindEvents() {
+                this.prevBtn.addEventListener('click', () => this.prev());
+                this.nextBtn.addEventListener('click', () => this.next());
+
+                // Touch/swipe support
+                let startX = 0;
+                let currentX = 0;
+                let isDragging = false;
+
+                this.track.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                });
+
+                this.track.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    currentX = e.touches[0].clientX;
+                });
+
+                this.track.addEventListener('touchend', () => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    const diff = startX - currentX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            this.next();
+                        } else {
+                            this.prev();
+                        }
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.prev();
+                    if (e.key === 'ArrowRight') this.next();
+                });
+            }
+        }
+
+        // Initialize carousel when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ProductCarousel();
+        });
